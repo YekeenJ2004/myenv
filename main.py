@@ -22,7 +22,6 @@ mail.select("inbox")
 
 today = datetime.today()
 today_date = datetime.today().strftime('%d-%b-%Y')
-today_date = '08-Nov-2024'
 day = today.day
 month = today.month
 year  = today.year
@@ -92,8 +91,8 @@ def run():
                 
                 print("File processed")
 run()
-# schedule.every().monday.at("19:00").do(run)
-# schedule.every().tuesday.at("19:00").do(run)
-# schedule.every().wednesday.at("19:00").do(run)
-# schedule.every().thursday.at("19:00").do(run)
-# schedule.every().friday.at("19:00").do(run)
+schedule.every().monday.at("19:00").do(run)
+schedule.every().tuesday.at("19:00").do(run)
+schedule.every().wednesday.at("19:00").do(run)
+schedule.every().thursday.at("19:00").do(run)
+schedule.every().friday.at("19:00").do(run)
