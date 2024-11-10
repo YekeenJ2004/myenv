@@ -90,7 +90,7 @@ def run():
                 sendWebhook(df_filtered)
                 
                 print("File processed")
-run()
+                
 schedule.every().monday.at("19:00").do(run)
 schedule.every().tuesday.at("19:00").do(run)
 schedule.every().wednesday.at("19:00").do(run)
