@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy the script and requirements.txt into the container
 COPY main.py /app/
+COPY .env /app/.env
 COPY requirements.txt /app/
 
 # Install Python dependencies
