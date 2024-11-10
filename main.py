@@ -90,9 +90,13 @@ def run():
                 sendWebhook(df_filtered)
                 
                 print("File processed")
-                
+
 schedule.every().monday.at("19:00").do(run)
 schedule.every().tuesday.at("19:00").do(run)
 schedule.every().wednesday.at("19:00").do(run)
 schedule.every().thursday.at("19:00").do(run)
 schedule.every().friday.at("19:00").do(run)
+
+while True:
+    schedule.run_pending()  # Check if any scheduled tasks need to run
+    time.sleep(600)  # Sleep for 60 seconds to avoid excessive CPU usage
