@@ -55,7 +55,8 @@ def sendWebhook(df_filtered) :
             ],
             "content" : str(row.get('Asin'))
         }
-        ping = {"content": f"<@&{1175848981436305408}>"}
+        roleid = os.getenv("ROLEID")
+        ping = {"content": f"<@&{roleid}>"}
         response = requests.post(webhook_url, json=data)
         ping = requests.post(webhook_url, json=ping)
         if response.status_code == 204:
@@ -99,4 +100,4 @@ schedule.every().friday.at("19:00").do(run)
 
 while True:
     schedule.run_pending()  # Check if any scheduled tasks need to run
-    time.sleep(600)  # Sleep for 60 seconds to avoid excessive CPU usage
+    time.sleep(50)  # Sleep for 60 seconds to avoid excessive CPU usage
