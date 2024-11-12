@@ -9,16 +9,20 @@ from io import BytesIO
 import schedule
 
 load_dotenv()
+def connect_to_mail():
+    mail = imaplib.IMAP4_SSL('imap.gmail.com')
+    my_email = os.getenv("EMAIL")
+    print(my_email)
+    password = os.getenv("PASSWORD")
+    print(password)
+    mail.login(my_email, password)
+    mail.select("inbox")
+    status, messages = mail.search(None, f'(FROM "dailyleadsourcer@gmail.com" ON {today_date})')
+    return [mail, messages]
 
-mail = imaplib.IMAP4_SSL('imap.gmail.com')
-my_email = os.getenv("EMAIL")
-print(my_email)
-password = os.getenv("PASSWORD")
-print(password)
-mail.login(my_email, password)
+
 from datetime import datetime
 
-mail.select("inbox")
 
 today = datetime.today()
 today_date = datetime.today().strftime('%d-%b-%Y')
@@ -68,10 +72,12 @@ def sendWebhook(df_filtered) :
         time.sleep(600)
 # Search for emails from dailyleadsourcer@gmail.com
 
-status, messages = mail.search(None, f'(FROM "dailyleadsourcer@gmail.com" ON {today_date})')
+
 
 def run():
+    mail,messages = connect_to_mail()
     for num in messages[0].split():
+        mail,mess = connect_to_mail()
         status, data = mail.fetch(num, '(RFC822)')
         msg = email.message_from_bytes(data[0][1])
         
